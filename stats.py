@@ -1,25 +1,17 @@
 def get_num_words(text):
-    words = text.split()
-    return len(words)
-
+    return len(text.split())
 
 def get_num_chars(text):
-    chars = {}
+    counts = {}
     for c in text.lower():
-        if c in chars:
-            chars[c] += 1
-        else:
-            chars[c] = 1
-    return chars
-
+        if c.isalpha():                   # count letters only
+            counts[c] = counts.get(c, 0) + 1
+    return counts
 
 def sort_on(item):
     return item["num"]
 
-
 def sort_chars_dict(char_dict):
-    sorted_list = []
-    for char, num in char_dict.items():
-        sorted_list.append({"char": char, "num": num})
-    sorted_list.sort(reverse=True, key=sort_on)
-    return sorted_list
+    out = [{"char": ch, "num": n} for ch, n in char_dict.items()]
+    out.sort(reverse=True, key=sort_on)   # highest count first
+    return out
